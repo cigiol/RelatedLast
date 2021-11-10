@@ -1,0 +1,53 @@
+SELECT * INTO #tempTargetStats
+FROM
+(
+SELECT TOP (1000)
+	SiteName,
+	[AuditTrail].[SiteID],
+	CASE
+		WHEN (ObjectType = 'Visilabs.Segment.Provider.Objects.TargetingAction')
+		THEN 'Action'
+		ELSE 'Rule'
+	END AS TargetType,
+	ObjectId AS TargetID,
+	Action,
+	FORMAT(ActionDate, 'yyyy-MM-dd HH:mm') AS ActionDate,
+	CASE
+       WHEN (Description LIKE '%EMAdminEmail%')
+       THEN SUBSTRING(SUBSTRING(Description, PATINDEX('% "EMAdminEmail":"%', Description) + 17, LEN(Description) - PATINDEX('% "EMAdminEmail":"%', Description) - 17), 0, PATINDEX('%"%', SUBSTRING(Description, PATINDEX('% "EMAdminEmail":"%', Description) + 17, LEN(Description) - PATINDEX('% "EMAdminEmail":"%', Description) - 17)))
+       ELSE SUBSTRING(SUBSTRING(Description, PATINDEX('% "Email":"%', Description) + 10, LEN(Description) - PATINDEX('% "Email":"%', Description) - 10), 0, PATINDEX('%"%', SUBSTRING(Description, PATINDEX('% "Email":"%', Description) + 10, LEN(Description) - PATINDEX('% "Email":"%', Description) - 10)))
+	END AS Staff,
+	OldData,
+	NewData,
+	CASE WHEN (Action = 'Delete')
+		THEN OldData
+		ELSE NewData
+	END AS Data
+	FROM [OfferMinerMaster].[dbo].[AuditTrail] WITH (NOLOCK)
+		LEFT JOIN [OfferMinerMaster].[dbo].[Sites] WITH (NOLOCK) ON [OfferMinerMaster].[dbo].[AuditTrail].SiteID = [OfferMinerMaster].[dbo].[Sites].SiteID
+	WHERE	ObjectType IN ('Visilabs.Segment.Provider.Objects.TargetingAction', 'VisilabsBLL.TargetRulesPager+Item')
+			AND [OfferMinerMaster].[dbo].[AuditTrail].[SiteID] = 726
+			--AND SiteName LIKE '%Support_Test_Sitesi%'
+			--AND ObjectId = 1
+			AND ActionDate > GETDATE() - 700
+  ORDER BY ActionDate DESC
+) AS TempResult
+SELECT
+SiteName,
+	SiteID,
+	TargetType,
+	TargetID,
+	CASE
+       WHEN (TargetType = 'Action')
+       THEN SUBSTRING(SUBSTRING(Data, PATINDEX('%"ActionName":"%', Data) + 14, DATALENGTH(Data) - PATINDEX('%"ActionName":"%', Data) - 14), 0, PATINDEX('%"%', SUBSTRING(Data, PATINDEX('%"ActionName":"%', Data) + 14, DATALENGTH(Data) - PATINDEX('%"ActionName":"%', Data) - 14)))
+       ELSE SUBSTRING(SUBSTRING(Data, PATINDEX('%"Title":"%', Data) + 9, DATALENGTH(Data) - PATINDEX('%"Title":"%', Data) - 9), 0, PATINDEX('%"%', SUBSTRING(Data, PATINDEX('%"Title":"%', Data) + 9, DATALENGTH(Data) - PATINDEX('%"Title":"%', Data) - 9)))
+	END AS TargetName,
+	OldData,
+	NewData,
+	Action,
+	ActionDate,
+	Staff
+ FROM
+(SELECT * FROM #tempTargetStats WITH(NOLOCK)) AS Result
+where TargetID=26
+DROP TABLE #tempTargetStats

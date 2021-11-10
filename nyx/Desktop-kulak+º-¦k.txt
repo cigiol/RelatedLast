@@ -1,0 +1,168 @@
+var stop = 0;
+var CodeTText;
+var observer = new MutationObserver(function (mutations) {
+    mutations.forEach(function (mutation) {
+        if (!mutation.addedNodes) return;
+
+        if (document.querySelector("#VisilabsScratchToWinBox_69")) {
+
+            observer.disconnect();
+            if (stop == 0) {
+                document.querySelector("#visi_lightbox_content_fixed").style.transform = "translate3d(0 , 0 , 3px)";
+                document.querySelector("#visi_lightbox_content_fixed").style.top = "calc(50% - 175px)";
+                document.querySelector("#visi_lightbox_content_fixed").style.left = "calc(50% - 125px)";
+
+                document.querySelector("#VisilabsScratchToWinBox_69").addEventListener("touchstart", function () {
+                    if (document.querySelector("#visilabs_mail_subscription_form_success_message_69").style.display == "block") {
+                        localStorage.setItem('danlaCode', document.querySelector("#VisilabsScratchToWinBox_69 > div").innerText);
+                        var now = new Date();
+                        now.setDate(now.getDate() + 1);
+                        localStorage.setItem('danlaExpire', now);
+                        ga("create", "UA-74706219-2", { name: "RMC", cookieDomain: "auto" });
+                        ga('RMC.send', 'event', 'RMC Targeting Actions', 'NonUser-KazıKazan-Mobile', "Coupon Copy", { nonInteraction: true });
+
+                    }
+                });
+
+                document.querySelector("#visilabs_copytoclipboard_btn").remove();
+                var codes = ["BU5R41", "2B45AK", "5EZ3NN", "6GKC3C", "S3DE7N", "OXZD2N", "7HAK4N"];
+                var r = Math.floor((Math.random() * codes.length));
+                var div = document.createElement("div");
+                div.innerText = codes[r];
+                div.style.background = "white";
+                div.style.textAlign = "center";
+                div.style.width = "240px";
+                div.style.height = "50px";
+                div.style.fontSize = "30px";
+                div.style.lineHeight = "50px";
+                div.style.fontFamily = "FUTURA";
+
+                document.querySelector("#VisilabsScratchToWinBox_69").append(div);
+                CodeTText = document.querySelector("#VisilabsScratchToWinBox_69 > div").innerText;
+
+                document.querySelector("#visi_lightbox_overlay").addEventListener("click", function () {
+                    var a = window.location.href;
+                    window.location.href = a;
+                });
+                document.querySelector("#visi_lightbox_overlay_wrapper").addEventListener("click", function () {
+                    var a = window.location.href;
+                    window.location.href = a;
+                });
+                document.querySelector("#img_lightbox_close").addEventListener("click", function () {
+                    var a = window.location.href;
+                    window.location.href = a;
+                });
+            }
+            stop++;
+            document.querySelector('#VisilabsScratchToWinCanvas_69').style.opacity = 1;
+            var scratch = document.querySelector("#VisilabsScratchToWinBox_69");
+            scratch.style.width = "240px";
+            scratch.style.top = "182px";
+            scratch.style.right = "5px";
+            scratch.style.float = "right";
+            scratch.style.borderRadius = "32px";
+            scratch.style.position = "absolute";
+            scratch.style.height = "40px";
+            scratch.style.background = "white";
+
+            document.querySelector("#VisilabsScratchToWinBox_69 > canvas").style.width = "240px";
+            document.querySelector("#VisilabsScratchToWinBox_69 > canvas").style.height = "40px";
+            document.querySelector("#VisilabsScratchToWinBox_69 > canvas").style.borderRadius = "32px";
+            document.querySelector("#VisilabsScratchToWinBox_69 > canvas").style.display = "none";
+            document.querySelector("#VisilabsScratchToWinCanvas_69").style.width = "240px";
+            document.querySelector("#VisilabsScratchToWinCanvas_69").style.height = "40px";
+            document.querySelector("#VisilabsScratchToWinCanvas_69").style.borderRadius = "32px";
+            document.querySelector("#img_lightbox_close").style.top = "0px";
+            document.querySelector("#img_lightbox_close").style.right = "0px";
+
+            document.querySelector("#visi_lightbox_popbox").style.padding = "0px";
+            document.querySelector("#visi_lightbox_popbox").style.height = "350px";
+
+            document.querySelector("#visi_lightbox_content_fixed").style.width = "250px";
+            document.querySelector("#visi_lightbox_content_fixed").style.height = "350px";
+
+
+            document.querySelector("#visilabs_mail_subscription_form_agreement_content_emailpermit_69 > label > span").style.position = "absolute";
+            document.querySelector("#visilabs_mail_subscription_form_agreement_content_emailpermit_69 > label > span").style.top = "28px";
+            document.querySelector("#visilabs_mail_subscription_form_agreement_content_emailpermit_69 > label > span").style.left = "15px";
+            document.querySelector("#visilabs_mail_subscription_form_agreement_content_emailpermit_69 > label > span").style.fontSize = "8px";
+
+
+            document.querySelector("#visilabs_mail_subscription_form_agreement_content_consent_69 > label > span").style.position = "absolute";
+            document.querySelector("#visilabs_mail_subscription_form_agreement_content_consent_69 > label > span").style.top = "51px";
+            document.querySelector("#visilabs_mail_subscription_form_agreement_content_consent_69 > label > span").style.left = "15px";
+            document.querySelector("#visilabs_mail_subscription_form_agreement_content_consent_69 > label > span").style.fontSize = "8px";
+
+
+
+
+            document.querySelector("#visilabs_mail_subscription_form_container_69").style.position = "absolute";
+            document.querySelector("#visilabs_mail_subscription_form_container_69").style.top = "230px";
+            document.querySelector("#visilabs_mail_subscription_form_container_69").style.right = "15px";
+            document.querySelector("#visilabs_mail_subscription_form_container_69").style.width = "220px";
+
+            document.querySelector("#visilabs_mail_subscription_form_input_69").style.width = "220px";
+            document.querySelector("#visilabs_mail_subscription_form_input_69").style.height = "22px";
+            document.querySelector("#visilabs_mail_subscription_form_input_69").style.minHeight = "10px";
+
+            document.querySelector("#visilabs_mail_subscription_form_consent_checkbox_69").style.top = "-29px";
+            document.querySelector("#visilabs_mail_subscription_form_consent_checkbox_69").style.marginTop = "8px";
+
+            document.querySelector("#visilabs_mail_subscription_form_emailpermit_checkbox_69").style.top = "-12px";
+
+
+
+            document.querySelector("#visilabs_mail_subscription_form_button_69").style.border = "0px";
+            document.querySelector("#visilabs_mail_subscription_form_button_69").style.background = "black";
+            document.querySelector("#visilabs_mail_subscription_form_button_69").style.color = "white";
+            document.querySelector("#visilabs_mail_subscription_form_button_69").style.fontWeight = "bold";
+            document.querySelector("#visilabs_mail_subscription_form_button_69").style.fontSize = "15px";
+            document.querySelector("#visilabs_mail_subscription_form_button_69").style.marginLeft = "75px";
+            document.querySelector("#visilabs_mail_subscription_form_button_69").style.marginTop = "23px";
+            document.querySelector("#visilabs_mail_subscription_form_button_69").style.lineHeight = "24px";
+            document.querySelector("#visilabs_mail_subscription_form_button_69").style.position = "absolute";
+
+            document.querySelector("#visilabs_mail_subscription_form_button_69").addEventListener("click", function () {
+
+                if (document.querySelector("#visilabs_mail_subscription_form_success_message_69").style.display == "block" || document.querySelector("#visilabs_mail_subscription_form_email_validation_message_69").style.display == "block") {
+                    document.querySelector("#visilabs_mail_subscription_form_agreement_content_emailpermit_69 > label > span").style.top = "45px";
+
+                    document.querySelector("#visilabs_mail_subscription_form_agreement_content_consent_69 > label > span").style.top = "67px";
+
+                    document.querySelector("#visilabs_mail_subscription_form_button_69").style.marginTop = "8px";
+                }
+
+            });
+
+            document.querySelector("#visilabs_mail_subscription_form_input_69").addEventListener("click", function () {
+
+                document.querySelector("#visilabs_mail_subscription_form_agreement_content_consent_69 > label > span").style.top = "51px";
+                document.querySelector("#visilabs_mail_subscription_form_agreement_content_consent_69 > label > span").style.left = "15px";
+                document.querySelector("#visilabs_mail_subscription_form_agreement_content_consent_69 > label > span").style.fontSize = "8px";
+
+                document.querySelector("#visilabs_mail_subscription_form_agreement_content_emailpermit_69 > label > span").style.top = "28px";
+                document.querySelector("#visilabs_mail_subscription_form_agreement_content_emailpermit_69 > label > span").style.left = "15px";
+                document.querySelector("#visilabs_mail_subscription_form_agreement_content_emailpermit_69 > label >span").style.fontSize="8px";
+
+document.querySelector("#visilabs_mail_subscription_form_button_69").style.marginTop = "23px";
+
+            });
+
+
+
+
+
+
+
+        }
+
+    })
+});
+
+
+observer.observe(document.body, {
+    childList: true
+    , subtree: true
+    , attributes: false
+    , characterData: false
+});

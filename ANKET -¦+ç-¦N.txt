@@ -1,0 +1,11 @@
+ANKET İÇİN;
+
+Çalışması için Profiles'dan bunu eklemen gerek OM.surveyKredi
+
+var vl = new Visilabs();
+        vl.AddParameter("OM.surveyKredi", answerText);
+        vl.Collect();
+
+
+
+Çalışması için Profiles'dan bunu eklemen gerek

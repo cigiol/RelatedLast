@@ -1,0 +1,408 @@
+<html>
+
+<head>
+    <style>
+        .content {
+            padding: 20px;
+            width: fit-content;
+            margin: auto;
+            text-align: center;
+        }
+
+        .target-content {
+            display: flex;
+            flex-direction: column;
+            margin-top: 20px;
+            width: fit-content;
+        }
+
+        .target-content input,
+        .target-content button {
+            width: 500px;
+            margin: 10px;
+        }
+
+        .vl-codeArea {
+            overflow: scroll;
+        }
+    </style>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+</head>
+
+<body>
+    <div class="content">
+        <p>YAPILACAK TARGETİ SEÇİNİZ.</p>
+        <input class="vl-radio" type="radio" id="dheader" name="type" value="dheader">
+        <label class="badge bg-primary">DESKTOP HEADER</label>
+        <input class="vl-radio" type="radio" id="mheader" name="type" value="mheader">
+        <label class="badge bg-primary">MOBİLE HEADER</label>
+        <input class="vl-radio" type="radio" id="hamburger" name="type" value="other">
+        <label class="badge bg-primary">HAMBURGER</label>
+        <input class="vl-radio" type="radio" id="gaployal" name="type" value="other">
+        <label class="badge bg-primary">GAP LOYALTY</label>
+        <div class="target-content">
+           
+        </div>
+    </div>
+    <script>
+
+
+        $(".vl-radio").change(function () {
+            if (document.querySelector("#dheader").checked || document.querySelector("#mheader").checked) {
+                var html = `
+                <input class="vl-name" type="text" placeholder="KURGU İSMİ GİRİNİZ...">
+                <input class="vl-img" type="text" placeholder="GÖRSEL LİNKİ GİRİNİZ...">
+                <input class="vl-link" type="text" placeholder="HEDEF LİNKİ GİRİNİZ...">
+                <button class="vl-button btn btn-primary">KURGUYU OLUŞTUR</button>
+                <textarea class="vl-codeArea" type="text" readonly disabled></textarea>
+                <button class="vl-copy btn btn-success">KOPYALA</button>
+                `;
+                document.querySelector(".target-content").innerHTML = html;
+            }
+            else if(document.querySelector("#hamburger").checked){
+                var html = `
+                <input class="vl-name" type="text" placeholder="KURGU İSMİ GİRİNİZ...">
+                <input class="vl-color" type="text" placeholder="RENK KODUNU GİRİNİZ(#002b70)...Zorunlu değil">
+                <input class="vl-text" type="text" placeholder="1.METNİ GİRİNİZ...">
+                <input class="vl-link" type="text" placeholder="1.LİNKİ GİRİNİZ...">
+                <input class="vl-text" type="text" placeholder="2.METNİ GİRİNİZ...">
+                <input class="vl-link" type="text" placeholder="2.LİNKİ GİRİNİZ...">
+                <input class="vl-text" type="text" placeholder="3.METNİ GİRİNİZ...">
+                <input class="vl-link" type="text" placeholder="3.LİNKİ GİRİNİZ...">
+                <input class="vl-text" type="text" placeholder="4.METNİ GİRİNİZ...">
+                <input class="vl-link" type="text" placeholder="4.LİNKİ GİRİNİZ...">
+                <button class="vl-button btn btn-primary">KURGUYU OLUŞTUR</button>
+                <textarea class="vl-codeArea" type="text" readonly disabled></textarea>
+                <button class="vl-copy btn btn-success">KOPYALA</button>
+                `;
+                document.querySelector(".target-content").innerHTML = html;
+            }
+            else if (document.querySelector("#gaployal").checked) {
+                var html = `
+                <input class="vl-dImg" type="text" placeholder="DESKTOP IMG">
+                <input class="vl-mImg" type="text" placeholder="MOBILE IMG">
+                <input class="vl-code" type="text" placeholder="KOD GİRİNİZ...">
+                <button class="vl-button btn btn-primary">KURGUYU OLUŞTUR</button>
+                <textarea class="vl-codeArea" type="text" readonly disabled></textarea>
+                <button class="vl-copy btn btn-success">KOPYALA</button>
+                `;
+                document.querySelector(".target-content").innerHTML = html;
+            }
+            var button = document.querySelector(".vl-button");
+            var codeArea = document.querySelector(".vl-codeArea");
+            var copy = document.querySelector(".vl-copy");
+            button.addEventListener("click", function () {
+                if (document.querySelector("#dheader").checked) {
+                    var name = document.querySelector(".vl-name").value;
+                    var img = document.querySelector(".vl-img").value;
+                    var link = document.querySelector(".vl-link").value;
+                    DesktopHeader(name, img, link);
+                }
+                else if(document.querySelector("#mheader").checked){
+                    var name = document.querySelector(".vl-name").value;
+                    var img = document.querySelector(".vl-img").value;
+                    var link = document.querySelector(".vl-link").value;
+                    MobileHeader(name, img, link);
+                }
+                else if(document.querySelector("#hamburger").checked){
+                    var links = document.querySelectorAll(".vl-link");
+                    var texts = document.querySelectorAll(".vl-text");
+                    var color = document.querySelector(".vl-color").value;
+                    var name = document.querySelector(".vl-name").value;
+                    MakeHamburger(name,links,texts,color);
+                }
+                else if(document.querySelector("#gaployal").checked){
+                    var dImg = document.querySelector(".vl-dImg").value;
+                    var mImg = document.querySelector(".vl-mImg").value;
+                    var code = document.querySelector(".vl-code").value;
+                    MakeLoyal(dImg,mImg,code);
+                }
+
+                codeArea.disabled = false;
+                console.log("hi");
+            });
+
+            copy.addEventListener("click", function () {
+                document.querySelector(".vl-codeArea").select();
+                document.execCommand('copy');
+            });
+
+            function DesktopHeader(Name, Img, Link) {
+                var jscodeArea = `if (document.querySelector("#vl-HeadBanner") != null) {
+                console.log('İkinci kez çalıştı');
+            }
+            else {
+                var yenidiv = document.createElement('div');
+                var a = document.createElement('a');
+                a.href = "${Link}";
+                var yeniimg = document.createElement('img');
+                yenidiv.appendChild(a);
+            
+                yeniimg.setAttribute('src', '${Img}');
+            
+                yenidiv.setAttribute("id", "vl-HeadBanner");
+                yeniimg.style.width = '100%';
+                yenidiv.style.top = '0';
+                yenidiv.style.position = "relative";
+                yenidiv.style.zIndex = "-5";
+                a.append(yeniimg);
+                $('header').append(yenidiv);
+                setTimeout(function () {
+                    var h = yenidiv.offsetHeight;
+                    document.querySelector("main").style = "padding-top:" + h + "px";
+                }, 500);
+                var campName = "${Name}";
+                ga("create", "UA-2253042-20", { name: "RMC", cookieDomain: "auto" });
+                ga('RMC.send', 'event', 'RMC', campName, "Impression", { nonInteraction: true });
+                <%VLSendImpressionFunc%>;
+                jQuery("#vl-HeadBanner").click(function () {
+                    ga('RMC.send', 'event', 'RMC', campName, "Click", { nonInteraction: true });
+                        <%VLSendClickFunc%>;
+                });
+            
+            }
+            
+            `;
+                codeArea.value = jscodeArea;
+            }
+
+            function MobileHeader(Name, Img, Link) {
+                var jscodeArea = `
+            
+                if (document.querySelector("#vl_HeadBanner") != null) {
+                console.log("İkinci kere çalıştı");
+            }
+            else {
+                
+                var yenidiv = document.createElement('div');
+                var a = document.createElement('a');
+                a.href = "${Link}";
+                var yeniimg = document.createElement('img');
+                yenidiv.appendChild(a);
+            
+                yeniimg.setAttribute('src', '${Img}');
+            
+                yenidiv.setAttribute("id", "vl_HeadBanner");
+                yeniimg.style.width = '100%';
+                yenidiv.style.top = '0';
+                a.append(yeniimg);
+                $('header').prepend(yenidiv);
+                 var campName="${Name}";
+            ga("create", "UA-2253042-20", {name: "RMC", cookieDomain: "auto"});
+            ga('RMC.send', 'event', 'RMC', campName, "Impression", {nonInteraction: true});
+            <%VLSendImpressionFunc%>;
+                yenidiv.addEventListener("click",function(){
+                    <%VLSendClickFunc%>;
+                    ga('RMC.send', 'event', 'RMC', campName, "Click", {nonInteraction: true});
+                });
+                var _interval = setInterval(function () {
+                    try {
+                    
+                        var h = document.querySelector("header").offsetHeight;
+                        var h2=document.querySelector("header").offsetHeight-10;
+                        var searchClickHeight=h2+70;
+                        var divs = document.querySelectorAll(".header__quickmenu--subz");
+                        for (var i = 0; i < divs.length; i++) {
+                            divs[i].style.top = h + "px";
+                        }
+                        var h3 = document.querySelector("#vl_HeadBanner").offsetHeight;
+                        var style=document.createElement("style");
+                        style.innerHTML=".mobile__search--active .ui-widget-content {top: 233px !important;}header.regular.partial{-webkit-transform: translate3d(0, -"+h3+"px, 0);transform: translate3d(0, -"+h3+"px, 0);}";
+                        document.head.append(style);
+                        var style=document.createElement("style");
+                        
+                        style.innerHTML= ".application{    padding-top: "+h2+"px !important;}@media (max-width: 959px){    body.mobile__search--active .application{        padding-top: "+searchClickHeight+"px !important;    }}
+                            
+                        ";
+                        document.head.append(style);
+                        clearInterval(_interval);
+                    } catch (ex) {
+                        clearInterval(_interval);
+                        return false;
+                    }
+                }, 1000);
+            
+            }
+            
+            `;
+                codeArea.value = jscodeArea;
+            }
+
+            function MakeHamburger(Name,Links,Texts,Color){
+                if(Color==""){
+                    Color="#002b70";
+                }
+                var jscodeArea=`
+                            (function(){
+            var list = [
+                {color:"${Color}", href: "${Links[0].value}", text: "${Texts[0].value}"},
+            {color:"${Color}", href: "${Links[1].value}", text: "${Texts[1].value}"},
+                {color:"${Color}", href: "${Links[2].value}", text: "${Texts[2].value}"},
+                    {color:"${Color}", href: "${Links[3].value}", text: "${Texts[3].value}"}
+            ];
+                var title = "";
+                var bubbleImage = "https://img.visilabs.net/banner/uploaded_images/230_1216_20200622085454741.png";
+            var css = '<style>\
+                    .vl-menu {position: fixed;background:url('+bubbleImage+');background-repeat:round;text-align: center; padding-top: 9px;width: 3.5em;height: 3.5em;border-radius: 5em;cursor: pointer;bottom:75px;left:10px;z-index: 9999999; transition: 1s all;}\
+                    .vl-menu .vl-menu-bar{transition: all 0.5s; opacity: 1; font-size: 9px; font-weight: 700; color: white; text-shadow: 1px 1px 3px #000;}\
+                    .vl-menu-count{background-color: #f8684f;  color: #fff;  position: absolute;  right: 0;  border-radius: 50%; top: -7px;  font-size: 12px;  font-weight: bold;    width: 15px;height: 15px;text-align: center;line-height: 15px;}\
+                    .vl-menu ul {list-style: none;padding: 0;position: relative;left: -4px; transform: rotate(180deg) translateY(-2em);transition: 1s all;top: -85px; opacity: 0;}\
+                    .vl-menu li {display: block; width: 250px;  height: 30px;  padding: 4px;  margin-top: 0.2em;  text-align: left;  border-radius: 2px;  transition: all 1s;  background: #0d1732; z-index: -1;  font-size:10px;}\
+                    .vl-menu a {color: white;text-decoration: none;line-height: 21px;}\
+                    .vl-menu.active ul{transform: rotate(45deg) translateY(-4px); opacity: 1}\
+                    .vl-menu li:nth-of-type(1) {transform: rotate(-45deg);position: absolute;left: 0px;top: -141px;}\
+                    .vl-menu li:nth-of-type(2) {transform: rotate(-45deg);position: absolute;left: 23px;top: -118px;}\
+                    .vl-menu li:nth-of-type(3) {position: absolute;left: 46px;top: -95px;transform: rotate(-45deg);}\
+                    .vl-menu li:nth-of-type(4) {position: absolute;left: 69px;top: -72px;transform: rotate(-45deg);}\
+                    .vl-menu li:nth-of-type(5) {position: absolute;left: 92px;top: -49px;transform: rotate(-45deg);}\
+                    .vl-menu li:nth-of-type(6) {position: absolute;left: 115px;top: -26px;transform: rotate(-45deg);}\
+                    .vl-menu .hint {text-align: center;}\
+                    </style>\
+                ';
+                jQuery('head').append(css);
+                var length = list.length;
+                var html = '\
+                    <div class="vl-menu">\
+                    <span class="vl-menu-bar">'+title+'</span>\
+                    <span class="vl-menu-count">'+length+'</span>\
+                    <ul>';
+                for(i=0;i<list.length;i++){
+                    html += '<li style="background-color:'+list[i].color+';" class="vl_list_item"><a href="'+list[i].href+'">'+list[i].text+'</a></li>'
+                }
+                html += '</ul></div>';
+                jQuery("body").append(html);
+                jQuery(".vl-menu").click(function () {
+                    jQuery(".vl-menu").toggleClass("active");
+                });
+                try{
+                    var campName="${Name}";
+                    <%VLSendImpressionFunc%>;
+                    ga("create", "UA-2253042-20", {name: "RMC", cookieDomain: "auto"});
+                    ga('RMC.send', 'event', 'RMC', campName, "Impression", {nonInteraction: true});
+                    }catch(e){};
+                jQuery('.vl-menu a').click(function(){
+                    try{<%VLSendClickFunc%>;
+                        ga('RMC.send', 'event', 'RMC', campName, "Click", {nonInteraction: true});
+                    }catch(e){};
+                });
+            })();
+                `;
+                codeArea.value = jscodeArea;
+            }
+            
+            function MakeLoyal(dImg,mImg,code){
+                console.log("oç");
+                var jscodeArea=`
+                if(!document.querySelector("#vl-loyaltyBanner")){
+                    var style = document.createElement("style");
+                    style.innerHTML = \`
+                        #vl-coupon-copier {
+                            position: absolute;
+                            top: 55%;
+                            right: 16%;
+                            width: 28%;
+                            height: 20%;
+                            cursor: pointer;
+                        }
+                        #vl-router {
+                            position: absolute;
+                            right: 4%;
+                            width: 13%;
+                            top: 32%;
+                            height: 20%;
+                            cursor: pointer;
+                        }
+                        
+                        @media only screen and (max-width: 768px) {
+                            #vl-coupon-copier {
+                                height: 18%;
+                                top: 63%;
+                                width: 92%;
+                                right: 4%;
+                            }
+                            #vl-router {
+                                right: 22%;
+                                width: 34%;
+                                top: 71%;
+                                height: 15%;
+                            }
+                        }
+                        
+                        
+                    \`;
+                    document.head.appendChild(style);
+
+                    var screenSize = window.innerWidth <= 768;
+
+                    var div = document.createElement("div");
+                    assigner(div, {
+                        id:"vl-loyaltyBanner",
+                        style: "margin-top: 50px;margin-bottom:27px;position:relative;"
+                    });
+
+                    if (screenSize) {
+                        assigner(div, {
+                            style: "margin-top:50px;padding:0;margin-bottom:27px;position:relative;"
+                        });
+                    }
+
+                    var target = document.querySelectorAll(".hp-slider")[0];
+                    if(screenSize){
+                        target = document.querySelectorAll(".hp-slider")[1];
+                    }
+                    target.after(div);
+
+                    var couponCopierLayer = document.createElement("div");
+                    assigner(couponCopierLayer, {
+                        id: "vl-coupon-copier"
+                    });
+
+                    div.appendChild(couponCopierLayer);
+
+                    var img = document.createElement("img");
+                    assigner(img, {
+                        src: screenSize ? "${mImg}" : "${dImg}",
+                        style: "object-fit:contain;width:100%"
+                    });
+
+                    div.appendChild(img);
+
+                    try{
+                    }catch(err){
+                        console.log("impression", err);
+                    }
+
+
+                    couponCopierLayer.addEventListener("click", function() {
+                        try{
+                            <%VLSendClickFunc%>;
+                        }catch(err){
+                            console.log("click", err);
+                        }
+                        var elem = document.createElement("textarea");
+                                    document.body.appendChild(elem);
+                                    elem.value = "${code}";
+                                    elem.select();
+                                    document.execCommand("copy");
+                                    document.body.removeChild(elem);
+                        alert("Kupon Kodu Kopyalandı!");
+                    });
+                    
+                }
+
+                function assigner(el, attributes) {
+                    Object.assign(el, attributes);
+                }
+                `;
+                codeArea.value = jscodeArea;
+            }
+        });
+
+
+
+    </script>
+</body>
+
+
+</html>

@@ -1,0 +1,8 @@
+izin metni = <a style="color:white;text-decoration: underline;" target="_blank" href="https://www.nyxcosmetics.com.tr/kisisel-verilerin-korunmasi">Kullanım koşullarını okudum ve kabul ediyorum.</a>
+kapsayıcı = background-image: url("https://img.visilabs.net/banner/uploaded_images/260_1264_20200319093658043.png");
+başlık = 1
+metin = padding: 20px 0;
+metin kutusu = text-indent: 10px;width: 60%;color:black;
+buton = background-color: #e9168c; border: unset;     border-radius: 5px;     width: 80px;color:white;
+izin metni kapsayıcı = width: 70%; margin: auto; padding: 10px 0;
+başarılı mesaj = color: #e9168c;margin-top: 18px;font-size: 16px;

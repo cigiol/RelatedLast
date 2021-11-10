@@ -1,0 +1,10 @@
+RECOLAR İÇİN ÖNERİLER
+
+-Kategori Çok Satanlar recosunda dip kategori kodlarında reco verimli çalışıyor fakat parent kategori kodlar verildiğinde reco dönmemeye başlıyor.(6 > 23 > 45 bu kategori hiyerarşisine sahip bir ürünü getirmek için 6 yerine 45 yazmamız gerekiyor.)
+-Ürünü Göster özelliği kullanılırken reco , şablon , target üçlüsünün farklı alanlar altından editlenmesi bu işlemi zorlaştırmaktadır.Önerimiz ürünü göster için kullanılan bu üç alanının aynı yerden editlenebilmesidir.
+-Recoları custom olarak çağırdığımızda(Arayüzden alınan kodla) dataArr değişkeni ile gelen datayı yazdırıp editleyebiliyoruz fakat ürünü göster yaptığımızda bu şekilde bir editleme şansımız olmamakta.Ürün göster targetinda da dönen response bir objeye basılabilirse daha az custom kurgu çalışılır.  
+-Recoların filtreli veya filtresiz nasıl çağırıldığının örneği(Gender filtresi eklendiyse aşağıdaki kod alanına da bu parametrenin kodla nasıl eklendiğin görünmesi)
+-Shuffle metodu.(Mesela çok satanlar çağırıldığında müşteri hep aynı sırayla gelmesini istememekte.Dolayısı ile bir karıştırma metodu koyabilirsek arayüzden checkbox ile aktif/pasif edilebilen, recoya çok satan ürünler her seferinde karışık şekilde gelebilir.)
+-Son gezilenler algoritmasında ikincil algoritma bulunmamakta.Müşteriler X ürün gezmediyse çok satanlar veya çok bakılanlar ile tamamlamak istiyor.
+-Recolardaki İkincil algoritmanın nasıl çalıştığını öğrenmek istiyoruz.(Hero reco çeşidini tamamlayabiliyormu?)
+-Kullanılan slide kütüphanelerini profilde her sayfada sadece 1 kez çalıştırmak istiyoruz.(Her targetın başında slider kütüphanesi yüklendiğinde sayfada yavaşlığa sebep oluyor.)

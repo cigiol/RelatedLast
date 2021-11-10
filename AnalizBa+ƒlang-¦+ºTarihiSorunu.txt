@@ -1,0 +1,17 @@
+MAGAGEMENT > PROFILES > DATA SOURCE KISMI 
+
+
+FİLTRESİZ
+
+\\VLABSLOGP1\logs\passoligcomtr-*.log;\\VLABSLOGP2\logs\passoligcomtr-*.log;\\VLABSLOGP3\logs\passoligcomtr-*.log;\\VLABSLOGP4\logs\passoligcomtr-*.log
+
+
+AYNI TARİHTE BAŞLAMIYORSA LOGLAR BÖYLE FİLTRELİ YAPIP ANALİZİ BAŞLATIP DÜZELTİCEZ SONRA
+\\VLABSLOGP1\logs\passoligcomtr-2020-05-22-*.log;\\VLABSLOGP2\logs\passoligcomtr-2020-05-22-*.log;\\VLABSLOGP3\logs\passoligcomtr-2020-05-22-*.log;\\VLABSLOGP4\logs\passoligcomtr-2020-05-22-*.log
+
+
+
+
+
+
+\\VLABSANALYSSP1\NewAnalysisEngineErrors  --> BU UZANTI DA DB DEN GİRİP ANALİZ LOGLARINA BAKMAK İÇİN.

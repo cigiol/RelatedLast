@@ -1,0 +1,70 @@
+<script type="text/javascript" id=”onVisilabsLoaded”>
+    function getCookie(e){for(var n=e+"=",t=decodeURIComponent(document.cookie).split(";"),o=0;o<t.length;o++){for(var r=t[o];" "==r.charAt(0);)r=r.substring(1);if(0==r.indexOf(n))return r.substring(n.length,r.length)}return""}
+    function setCookie(e,t,i){var o=new Date;o.setTime(o.getTime()+24*i*60*60*1e3);var n="expires="+o.toUTCString();document.cookie=e+"="+t+";"+n+";path=/"}
+    function getDate(){
+      var d = new Date();
+      var year = d.getFullYear();
+      var month = d.getMonth() + 1;
+      var day = d.getDate();
+      month = month < 10 ? '0' + month : month;
+      day = day < 10 ? '0' + day : day;
+      return year.toString() + month + day;
+    }
+    function OnVisilabsLoaded(){
+        var loginStatus = {{RMC - Login}};
+        var vl = new Visilabs();
+          if(loginStatus === 'false' && google_tag_params.isSigned === "Yes"){
+          if(google_tag_params.hVisitorKey !=null){
+            vl.AddParameter("OM.exVisitorID", google_tag_params.hVisitorKey);
+          }
+              var date = getDate();
+            if(date === google_tag_params.userCreated && loginStatus !== "Signup"){
+                vl.AddParameter("OM.b_sgnp", "1");
+                setCookie("OM.login", "Signup", 1);              
+            }
+            else{
+                vl.AddParameter("OM.b_login", "1");
+                document.cookie = "OM.login=true;path=/";
+            }
+        }
+      var cartID = getCookie("_gid");
+      var products = google_tag_params.cartItems;
+      var pb= "";
+      var pu= "";
+      var ppr = "";
+      if(products){
+      for(i=0; i<products.length; i++){
+        var id = products[i].id;
+        if(id.indexOf(".") > -1){
+          pb += id.split(".")[0];
+        }
+        else {
+          pb += id;
+        }
+        pu += products[i].quantity;
+        ppr += products[i].quantity*products[i].price;
+        if(i<products.length-1){
+          pb += ";";
+          pu += ";";
+          ppr += ";";
+        }
+      }
+    }
+      vl.AddParameter("OM.pbid", products ? cartID:"");
+      vl.AddParameter("OM.pb",pb);
+      vl.AddParameter("OM.pu",pu);
+      vl.AddParameter("OM.ppr",ppr);
+      vl.Collect();
+      vl.SuggestActions();
+      }
+    </script>
+    <script type="text/javascript">
+    var l = (location.protocol.indexOf("https")==0?"https":"http") + "://vsh.visilabs.net/Visilabs.js?sid=6D5569494D30363170564D3D&oid=794F457774596C5A7331553D";
+    var s = document.createElement("script");
+    if(location.href.toString().indexOf("vldebug=true") > 0){l = (location.protocol.indexOf("https")==0?"https":"http") + "://vsh.visilabs.net/Visilabs_Debug.js?sid=6D5569494D30363170564D3D&oid=794F457774596C5A7331553D";}
+    s.onload = function(){try{OnVisilabsLoaded();}catch(Ex){console.log(Ex)}};
+    s.type = "text/javascript";
+    s.src = l;
+    document.getElementsByTagName("head")[0].appendChild(s);
+    </script>
+    
