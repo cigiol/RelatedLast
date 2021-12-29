@@ -1,16 +1,18 @@
 function SettingsPopup() {
-    var desktopWidth = "500px";
+    var desktopWidth = "400px";
     var desktopHeight = "auto";
-    var mobileWidth = "330px";
+    var mobileWidth = "250px";
     var mobileHeight = "auto";
-    var image = "https://img.visilabs.net/banner/uploaded_images/184_1301_20210224135459836.jpg";
-    var url = "https://www.dsdamat.com/erkek-kravat-modelleri/";
-    FirePopup(desktopWidth, desktopHeight, mobileWidth, mobileHeight, image, url);
+    var image = "https://imgvisilabsnet.azureedge.net/banner/uploaded_images/230_1218_20211117155636432.jpg";
+    var mImage = "https://imgvisilabsnet.azureedge.net/banner/uploaded_images/230_1218_20211117155625246.jpg";
+    var url = "https://www.pierrecardin.com.tr/";
+    FirePopup(desktopWidth, desktopHeight, mobileWidth, mobileHeight, image, mImage, url);
 }
 
 SettingsPopup();
-function FirePopup(width, height, mWidth, mHeight, img, link) {
+function FirePopup(width, height, mWidth, mHeight, img, mImg, link) {
     if (!document.querySelector(".vl-popup-container")) {
+        var isMobile = window.innerWidth < 600;
         var style = document.createElement("style");
         style.innerHTML = `
         .vl-popup-container{
@@ -81,7 +83,7 @@ function FirePopup(width, height, mWidth, mHeight, img, link) {
         <div class="vl-popup">
         <img class="vl-popup-close" src="https://img.visilabs.net/banner/uploaded_images/323_1326_20210127153709279.png">
         <a href=${link}>
-        <img src=${img}>
+        <img src=${isMobile ? mImg : img}>
         </a>
         </div>
     `;

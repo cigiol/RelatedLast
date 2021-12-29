@@ -39,7 +39,6 @@ setInterval(() => {
             badgeIt();
         }, 1000);
     }
-    scrollDetectFunction();
 }, 2000);
 
 //OBSERVER
@@ -70,6 +69,8 @@ observer.observe(observingElement, {
 
   //TÜRKÇE KARAKTER DÜZELTME
   decodeURIComponent();
+  toLocaleLowerCase('tr-TR');
+
 
 
   //EVENT ATMA
@@ -80,7 +81,7 @@ observer.observe(observingElement, {
     vl.Collect();
     });
 
-
+//fit-content iosta olmuyor.
 
 //STORY İSMİNİ ALT SATIRA GEÇİRMEK İÇİN.
     display: inline-block;
@@ -149,6 +150,10 @@ Bilginize
 //Product Integration'a EuroMsgProductIntegration True ekle. Mail form entegrasyonunu da yap.
 
 
+//ARROW
+https://imgvisilabsnet.azureedge.net/banner/uploaded_images/230_1218_20211223162544011.png
+https://imgvisilabsnet.azureedge.net/banner/uploaded_images/230_1218_20211223162555590.png
+
 //datalayer push
 dataLayer.push({
   vl_purchase_count: 3
@@ -182,3 +187,60 @@ dataLayer.push({
   /* CSS for other than iOS devices */ 
 }
 ///
+
+//ref değişimi
+Ref değişimlerinde
+Emailden key id ye dönülen senaryolarda
+Param search alanında bulunan OM.em yi kaldırmayı unutmayın
+Bide komple kapanan visilabs hesaplarında daha önce em ile beraber segment kullandıysa data döndürmeye devam ediyor. Bunun içinde Em config alanının disable edilmesi gerekiyor.
+
+
+
+
+//MOBILE SWIPE ANIMATION
+document.addEventListener('touchstart', handleTouchStart, false);
+document.addEventListener('touchmove', handleTouchMove, false);
+
+var xDown = null;
+var yDown = null;
+
+function getTouches(evt) {
+    return evt.touches ||
+        evt.originalEvent.touches;
+}
+
+function handleTouchStart(evt) {
+    const firstTouch = getTouches(evt)[0];
+    xDown = firstTouch.clientX;
+    yDown = firstTouch.clientY;
+};
+
+function handleTouchMove(evt) {
+    if (!xDown || !yDown) {
+        return;
+    }
+
+    var xUp = evt.touches[0].clientX;
+    var yUp = evt.touches[0].clientY;
+
+    var xDiff = xDown - xUp;
+    var yDiff = yDown - yUp;
+
+    if (Math.abs(xDiff) > Math.abs(yDiff)) {
+        if (xDiff > 0) {
+        } else {
+        }
+    } else {
+        if (yDiff > 0) {
+        } else {
+            console.log(yDiff);
+            div.style.bottom = '-300px';
+            setTimeout(() => {
+                div.remove();
+            }, 1000);
+
+        }
+    }
+    xDown = null;
+    yDown = null;
+};
