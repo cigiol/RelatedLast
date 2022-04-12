@@ -45,7 +45,7 @@ function FirePopup(width, height, mWidth, mHeight, img, mImg, link) {
             -webkit-transform: translate(-50%,-50%);
         }
 
-        .vl-popup > a > img {
+        .vl-popup-img {
             width:${width};
             height:${height};
         }
@@ -64,7 +64,7 @@ function FirePopup(width, height, mWidth, mHeight, img, mImg, link) {
                 width:${mWidth};
                 height:${mHeight};
             }
-            .vl-popup > a > img {
+            .vl-popup-img {
                 width:${mWidth};
                 height:${mHeight};
             }
@@ -83,7 +83,7 @@ function FirePopup(width, height, mWidth, mHeight, img, mImg, link) {
         <div class="vl-popup">
         <img class="vl-popup-close" src="https://img.visilabs.net/banner/uploaded_images/323_1326_20210127153709279.png">
         <a href=${link}>
-        <img src=${isMobile ? mImg : img}>
+        <img class="vl-popup-img" src=${isMobile ? mImg : img}>
         </a>
         </div>
     `;

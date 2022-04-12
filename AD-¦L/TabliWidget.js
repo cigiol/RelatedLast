@@ -89,15 +89,6 @@ function secondTab(arr){
     console.log(arr);
 }
 
-
-
-
-
-
-
-
-
-
 function CallBackMethod(dataArr) {
     if (dataArr.length > 0) {
 

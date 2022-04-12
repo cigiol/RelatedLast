@@ -4,21 +4,23 @@ function check_cookie_name(name) {
         return match[2];
     }
 }
-var campName="Exit-Intent-13.08.21";
-var checkCookie = check_cookie_name("vlExitCodeExpire");
+var campName = "Exit-Intent-06.04.22";
+var checkCookie = check_cookie_name(campName);
+var isMobile = window.innerWidth < 768;
 if (!checkCookie) {
 
     function SettingsPopup() {
-        var desktopWidth = "1000px";
-        var desktopHeight = "500px";
-        var mobileWidth = "330px";
+        var desktopWidth = "600px";
+        var desktopHeight = "400px";
+        var mobileWidth = "300px";
         var mobileHeight = "auto";
-        var image = "https://imgvisilabsnet.azureedge.net/banner/uploaded_images/359_1370_20210813104739132.jpg";
-        var url = "";
-        FirePopup(desktopWidth, desktopHeight, mobileWidth, mobileHeight, image, url);
+        var image = "http://img.euromsg.net/53BB9BCDA86B46C7A3D3F31DFC89DE30/files/kappa_600x400_2.jpg";
+        var mobilImage = "http://img.euromsg.net/53BB9BCDA86B46C7A3D3F31DFC89DE30/files/kappa_300x400.jpg";
+        var url = "https://www.kappa-tr.com/tr/dominic-cekilisi";
+        FirePopup(desktopWidth, desktopHeight, mobileWidth, mobileHeight, image, mobilImage, url);
     }
 
-    function FirePopup(width, height, mWidth, mHeight, img, link) {
+    function FirePopup(width, height, mWidth, mHeight, img, mImg, link) {
         if (!document.querySelector(".vl-popup-container")) {
             var style = document.createElement("style");
             style.innerHTML = `
@@ -114,14 +116,14 @@ if (!checkCookie) {
             var div = document.createElement("div");
             div.setAttribute("class", "vl-popup-container");
             div.innerHTML = `
-        <div class="vl-popup-overlay"></div> 
-        <div class="vl-popup">
-        <img class="vl-popup-close" src="https://img.visilabs.net/banner/uploaded_images/323_1326_20210127153709279.png">
-        <a href="https://www.cacharel.com.tr/tum-alisverislerde-kampanya/">
-        <img src=${img}>
-        </a>
-        </div>
-    `;
+                <div class="vl-popup-overlay"></div> 
+                <div class="vl-popup">
+                <img class="vl-popup-close" src="https://img.visilabs.net/banner/uploaded_images/323_1326_20210127153709279.png">
+                <a href="${link}">
+                <img src=${isMobile ? mImg : img}>
+                </a>
+                </div>
+            `;
             document.body.append(div);
 
             document.querySelector(".vl-popup-overlay").addEventListener("click", closePopup);
@@ -137,26 +139,65 @@ if (!checkCookie) {
             var day = d.getDate();
             d.setTime(d.getTime() + (0.5 * 60 * 60 * 1000));
             var c = new Date(year, month, day + 1);
-            document.cookie = "vlExitCodeExpire=" + d + ";path=/;expires=" + c;
+            document.cookie = `${campName}=${d};path=/;expires=${c}`;
 
-            div.querySelector("a").addEventListener("click",function(){
+            div.querySelector("a").addEventListener("click", function () {
                 <%VLSendClickFunc%>
-                ga('RMC.send', 'event', 'RMC', campName, "Click", {nonInteraction: true});
             });
 
         }
     }
 
     var exitCheck = false;
-    document.addEventListener("mouseleave", function (e) {
-        if (e.clientY < 0 && exitCheck == false) {
-            exitCheck = true;
-            SettingsPopup();
-            <%VLSendImpressionFunc%>
-            ga("create", "UA-5051374-3", {name: "RMC", cookieDomain: "auto"});
-            ga('RMC.send', 'event', 'RMC', campName, "Impression", {nonInteraction: true});
-        }
+    if (isMobile) {
+        var lastScrollTop = 0;
+        var checkScrollSpeed = (function (settings) {
+            settings = settings || {};
+            var lastPos, newPos, timer, delta,
+                delay = settings.delay || 50;
+            function clear() {
+                lastPos = null;
+                delta = 0;
+            }
+            clear();
 
-    }, false);
+            return function () {
+                newPos = window.scrollY;
+                if (lastPos != null) {
+                    delta = newPos - lastPos;
+                }
+                lastPos = newPos;
+                clearTimeout(timer);
+                timer = setTimeout(clear, delay);
+                return delta;
+            };
+        })();
+        document.addEventListener("scroll", function () {
+
+            var st = window.pageYOffset || document.documentElement.scrollTop;
+            if (st > lastScrollTop) {
+            } else {
+                if (checkScrollSpeed() <= -80) {
+                    if (!exitCheck) {
+                        SettingsPopup();
+                        exitCheck = true;
+
+                    }
+                }
+            }
+            lastScrollTop = st <= 0 ? 0 : st;
+
+        }, false);
+    }
+    else {
+        document.addEventListener("mouseleave", function (e) {
+            if (e.clientY < 0 && exitCheck == false) {
+                exitCheck = true;
+                SettingsPopup();
+                <%VLSendImpressionFunc%>
+            }
+
+        }, false);
+    }
 
 }
